@@ -1,0 +1,142 @@
+.graphContainer {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  backdrop-filter: blur(10px);
+  margin-bottom: 32px;
+}
+
+.graphHeader {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.graphHeader h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.025em;
+}
+
+.graphHeader p {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+  font-weight: 500;
+}
+
+.lineChartContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  min-height: 240px;
+}
+
+.lineChart {
+  max-width: 100%;
+  height: auto;
+}
+
+.linePath {
+  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.3));
+  transition: all 0.3s ease;
+}
+
+.dataPoint {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.4));
+}
+
+.dataPoint:hover {
+  r: 6;
+  fill: #059669;
+  filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.6));
+}
+
+.priceLabel {
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dataPoint:hover + .priceLabel,
+.priceLabel:hover {
+  opacity: 1;
+}
+
+.itemLabel {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.graphFooter {
+  margin-top: 20px;
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.graphFooter p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+}
+
+.loadingSpinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(148, 163, 184, 0.2);
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.noData {
+  text-align: center;
+  color: #94a3b8;
+  padding: 40px 20px;
+}
+
+.noData span {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.noData p {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .graphContainer {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .graphHeader h3 {
+    font-size: 18px;
+  }
+  
+  .graphHeader p {
+    font-size: 13px;
+  }
+  
+  .lineChartContainer {
+    min-height: 200px;
+  }
+} 

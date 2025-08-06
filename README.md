@@ -28,4 +28,3 @@ The app integrates with the [tarkov.dev GraphQL API](https://api.tarkov.dev/grap
 - [ ] 24h price trend charts
 - [ ] Price alerts and notifications
 - [ ] Advanced filtering options
-- [ ] Dark mode theme
