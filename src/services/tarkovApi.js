@@ -15,6 +15,11 @@ const ITEMS_QUERY = `
         currency
         source
       }
+      buyFor {
+        price
+        currency
+        source
+      }
     }
   }
 `;
@@ -42,8 +47,27 @@ export const fetchTarkovItems = async () => {
       throw new Error(json.errors[0].message);
     }
 
-    console.log(`Successfully fetched ${json.data.items.length} items`);
-    return json.data.items;
+    const items = json.data.items;
+    console.log(`Successfully fetched ${items.length} items`);
+
+    // Debug: Log first few items to see data structure
+    if (items.length > 0) {
+      console.log("Sample item data:", items[0]);
+      console.log(
+        "Items with avg24hPrice:",
+        items.filter((item) => item.avg24hPrice).length
+      );
+      console.log(
+        "Items with sellFor:",
+        items.filter((item) => item.sellFor && item.sellFor.length > 0).length
+      );
+      console.log(
+        "Items with buyFor:",
+        items.filter((item) => item.buyFor && item.buyFor.length > 0).length
+      );
+    }
+
+    return items;
   } catch (error) {
     console.error("Error fetching Tarkov items:", error);
     throw new Error(`Failed to load Tarkov market data: ${error.message}`);

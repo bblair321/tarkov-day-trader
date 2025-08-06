@@ -3,21 +3,31 @@ import { calculateProfit, calculateROI } from "../services/tarkovApi";
 import "./ItemCard.css";
 
 const ItemCard = ({ item }) => {
-  const fleaPrice = item.avg24hPrice;
+  const avg24hPrice = item.avg24hPrice;
   const lastLowPrice = item.lastLowPrice;
   const sellFor = item.sellFor || [];
+  const buyFor = item.buyFor || [];
 
-  // Separate flea market and trader prices
-  const fleaMarketSales = sellFor.filter(
-    (sale) => sale.source === "flea-market"
+  // Get flea market prices from sellFor (source can be "fleaMarket" or "flea-market")
+  const fleaMarketSell = sellFor.filter(
+    (sale) => sale.source === "fleaMarket" || sale.source === "flea-market"
   );
-  const traderSales = sellFor.filter((sale) => sale.source !== "flea-market");
+  const fleaMarketBuy = buyFor.filter(
+    (buy) => buy.source === "fleaMarket" || buy.source === "flea-market"
+  );
+  const traderSales = sellFor.filter(
+    (sale) => sale.source !== "fleaMarket" && sale.source !== "flea-market"
+  );
 
-  // Get best flea price (highest)
-  const bestFleaPrice =
-    fleaMarketSales.length > 0
-      ? Math.max(...fleaMarketSales.map((sale) => sale.price))
-      : fleaPrice;
+  // Get best flea price (highest from sellFor, then buyFor, fallback to avg24hPrice)
+  let bestFleaPrice = null;
+  if (fleaMarketSell.length > 0) {
+    bestFleaPrice = Math.max(...fleaMarketSell.map((sale) => sale.price));
+  } else if (fleaMarketBuy.length > 0) {
+    bestFleaPrice = Math.max(...fleaMarketBuy.map((buy) => buy.price));
+  } else {
+    bestFleaPrice = avg24hPrice;
+  }
 
   // Get best trader price (highest)
   const bestTraderPrice =
@@ -51,6 +61,22 @@ const ItemCard = ({ item }) => {
     }
   };
 
+  // Determine what to show for flea market price
+  const getFleaPriceDisplay = () => {
+    if (bestFleaPrice) {
+      return formatPrice(bestFleaPrice);
+    }
+    return "N/A";
+  };
+
+  // Determine the label based on available data
+  const getFleaPriceLabel = () => {
+    if (avg24hPrice) return "Flea Market (24h avg)";
+    if (fleaMarketSell.length > 0 || fleaMarketBuy.length > 0)
+      return "Flea Market Price";
+    return "Flea Market Price";
+  };
+
   return (
     <div className="item-card">
       <div className="item-header">
@@ -71,10 +97,8 @@ const ItemCard = ({ item }) => {
 
       <div className="item-prices">
         <div className="price-section">
-          <div className="price-label">Flea Market (24h avg)</div>
-          <div className="price-value flea-price">
-            {formatPrice(bestFleaPrice)}
-          </div>
+          <div className="price-label">{getFleaPriceLabel()}</div>
+          <div className="price-value flea-price">{getFleaPriceDisplay()}</div>
           {lastLowPrice && lastLowPrice !== bestFleaPrice && (
             <div className="price-subtitle">
               Last Low: {formatPrice(lastLowPrice)}
