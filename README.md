@@ -11,7 +11,7 @@ A React web application that fetches live market data from Escape from Tarkov's 
 - **Responsive Design**: Works on desktop and mobile devices
 - **Modern UI**: Clean, professional interface with smooth animations
 
-## 📊 API Integration
+## API Integration
 
 The app integrates with the [tarkov.dev GraphQL API](https://api.tarkov.dev/graphql) to fetch:
 
@@ -21,7 +21,7 @@ The app integrates with the [tarkov.dev GraphQL API](https://api.tarkov.dev/grap
 - Real-time market data
 - Currency information (₽, $, €)
 
-## 🔮 Future Features
+## Future Features
 
 - [ ] Sort items by profit margin
 - [ ] Favorite/starred items (localStorage)
