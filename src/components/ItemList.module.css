@@ -1,8 +1,8 @@
-.item-list {
+.itemList {
   width: 100%;
 }
 
-.results-info {
+.resultsInfo {
   text-align: center;
   color: #6b7280;
   font-size: 14px;
@@ -12,17 +12,17 @@
   border-radius: 8px;
 }
 
-.items-grid {
+.itemsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 20px;
   margin-bottom: 40px;
 }
 
-.loading-container,
-.error-container,
-.no-results,
-.no-data {
+.loadingContainer,
+.errorContainer,
+.noResults,
+.noData {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@
   color: #6b7280;
 }
 
-.loading-spinner {
+.loadingSpinner {
   width: 40px;
   height: 40px;
   border: 4px solid #e5e7eb;
@@ -47,31 +47,31 @@
   100% { transform: rotate(360deg); }
 }
 
-.error-icon,
-.no-results-icon,
-.no-data-icon {
+.errorIcon,
+.noResultsIcon,
+.noDataIcon {
   font-size: 48px;
   margin-bottom: 16px;
 }
 
-.error-container h3,
-.no-results h3,
-.no-data h3 {
+.errorContainer h3,
+.noResults h3,
+.noData h3 {
   margin: 0 0 8px 0;
   color: #1f2937;
   font-size: 20px;
   font-weight: 600;
 }
 
-.error-container p,
-.no-results p,
-.no-data p {
+.errorContainer p,
+.noResults p,
+.noData p {
   margin: 0 0 20px 0;
   color: #6b7280;
   font-size: 16px;
 }
 
-.retry-button {
+.retryButton {
   background: #3b82f6;
   color: white;
   border: none;
@@ -83,20 +83,20 @@
   transition: background-color 0.2s ease;
 }
 
-.retry-button:hover {
+.retryButton:hover {
   background: #2563eb;
 }
 
 @media (max-width: 768px) {
-  .items-grid {
+  .itemsGrid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
   
-  .loading-container,
-  .error-container,
-  .no-results,
-  .no-data {
+  .loadingContainer,
+  .errorContainer,
+  .noResults,
+  .noData {
     padding: 40px 20px;
   }
 } 

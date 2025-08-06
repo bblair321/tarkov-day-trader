@@ -1,6 +1,6 @@
 import React from "react";
 import ItemCard from "./ItemCard";
-import "./ItemList.css";
+import styles from "./ItemList.module.css";
 
 const ItemList = ({ items, searchTerm, loading, error }) => {
   // Filter items based on search term
@@ -10,8 +10,8 @@ const ItemList = ({ items, searchTerm, loading, error }) => {
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}></div>
         <p>Loading Tarkov market data...</p>
       </div>
     );
@@ -19,12 +19,12 @@ const ItemList = ({ items, searchTerm, loading, error }) => {
 
   if (error) {
     return (
-      <div className="error-container">
-        <div className="error-icon">⚠️</div>
+      <div className={styles.errorContainer}>
+        <div className={styles.errorIcon}>⚠️</div>
         <h3>Error loading data</h3>
         <p>{error}</p>
         <button
-          className="retry-button"
+          className={styles.retryButton}
           onClick={() => window.location.reload()}
         >
           Try Again
@@ -35,8 +35,8 @@ const ItemList = ({ items, searchTerm, loading, error }) => {
 
   if (searchTerm && filteredItems.length === 0) {
     return (
-      <div className="no-results">
-        <div className="no-results-icon">🔍</div>
+      <div className={styles.noResults}>
+        <div className={styles.noResultsIcon}>🔍</div>
         <h3>No items found</h3>
         <p>Try searching for a different item name</p>
       </div>
@@ -45,8 +45,8 @@ const ItemList = ({ items, searchTerm, loading, error }) => {
 
   if (items.length === 0) {
     return (
-      <div className="no-data">
-        <div className="no-data-icon">📦</div>
+      <div className={styles.noData}>
+        <div className={styles.noDataIcon}>📦</div>
         <h3>No market data available</h3>
         <p>Unable to load Tarkov market data at this time</p>
       </div>
@@ -54,12 +54,12 @@ const ItemList = ({ items, searchTerm, loading, error }) => {
   }
 
   return (
-    <div className="item-list">
-      <div className="results-info">
+    <div className={styles.itemList}>
+      <div className={styles.resultsInfo}>
         Showing {filteredItems.length} of {items.length} items
         {searchTerm && ` for "${searchTerm}"`}
       </div>
-      <div className="items-grid">
+      <div className={styles.itemsGrid}>
         {filteredItems.map((item) => (
           <ItemCard key={item.id} item={item} />
         ))}

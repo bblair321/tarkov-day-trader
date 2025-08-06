@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar";
 import ItemList from "./components/ItemList";
 import { fetchTarkovItems } from "./services/tarkovApi";
-import "./App.css";
+import styles from "./App.module.css";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -28,21 +28,21 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <div className="header-content">
-          <h1 className="app-title">
-            <span className="title-icon">💰</span>
+    <div className={styles.app}>
+      <header className={styles.appHeader}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.appTitle}>
+            <span className={styles.titleIcon}>💰</span>
             Tarkov Day Trader
           </h1>
-          <p className="app-subtitle">
+          <p className={styles.appSubtitle}>
             Real-time flea market vs trader price comparisons
           </p>
         </div>
       </header>
 
-      <main className="app-main">
-        <div className="container">
+      <main className={styles.appMain}>
+        <div className={styles.container}>
           <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
 
           <ItemList
@@ -54,17 +54,17 @@ function App() {
         </div>
       </main>
 
-      <footer className="app-footer">
-        <div className="container">
+      <footer className={styles.appFooter}>
+        <div className={styles.container}>
           <p>
             Data provided by{" "}
             <a
-              href="https://tarkov-tools.com"
+              href="https://api.tarkov.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="footer-link"
+              className={styles.footerLink}
             >
-              Tarkov Tools
+              tarkov.dev
             </a>
           </p>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { calculateProfit, calculateROI } from "../services/tarkovApi";
-import "./ItemCard.css";
+import styles from "./ItemCard.module.css";
 
 const ItemCard = ({ item }) => {
   const avg24hPrice = item.avg24hPrice;
@@ -45,7 +45,7 @@ const ItemCard = ({ item }) => {
 
   const getProfitClass = (profit) => {
     if (!profit) return "";
-    return profit > 0 ? "profit-positive" : "profit-negative";
+    return profit > 0 ? styles.profitPositive : styles.profitNegative;
   };
 
   const formatCurrency = (currency) => {
@@ -78,49 +78,51 @@ const ItemCard = ({ item }) => {
   };
 
   return (
-    <div className="item-card">
-      <div className="item-header">
-        <div className="item-image">
+    <div className={styles.itemCard}>
+      <div className={styles.itemHeader}>
+        <div className={styles.itemImage}>
           {item.gridImageLink ? (
             <img src={item.gridImageLink} alt={item.name} />
           ) : (
-            <div className="item-placeholder">📦</div>
+            <div className={styles.itemPlaceholder}>📦</div>
           )}
         </div>
-        <div className="item-name">
+        <div className={styles.itemName}>
           <h3>{item.name}</h3>
           {item.shortName && item.shortName !== item.name && (
-            <span className="item-short-name">({item.shortName})</span>
+            <span className={styles.itemShortName}>({item.shortName})</span>
           )}
         </div>
       </div>
 
-      <div className="item-prices">
-        <div className="price-section">
-          <div className="price-label">{getFleaPriceLabel()}</div>
-          <div className="price-value flea-price">{getFleaPriceDisplay()}</div>
+      <div className={styles.itemPrices}>
+        <div className={styles.priceSection}>
+          <div className={styles.priceLabel}>{getFleaPriceLabel()}</div>
+          <div className={`${styles.priceValue} ${styles.fleaPrice}`}>
+            {getFleaPriceDisplay()}
+          </div>
           {lastLowPrice && lastLowPrice !== bestFleaPrice && (
-            <div className="price-subtitle">
+            <div className={styles.priceSubtitle}>
               Last Low: {formatPrice(lastLowPrice)}
             </div>
           )}
         </div>
 
-        <div className="price-section">
-          <div className="price-label">Best Trader Price</div>
-          <div className="price-value trader-price">
+        <div className={styles.priceSection}>
+          <div className={styles.priceLabel}>Best Trader Price</div>
+          <div className={`${styles.priceValue} ${styles.traderPrice}`}>
             {formatPrice(bestTraderPrice)}
           </div>
         </div>
 
         {profit !== null && (
-          <div className="profit-section">
-            <div className="profit-label">Profit</div>
-            <div className={`profit-value ${getProfitClass(profit)}`}>
+          <div className={styles.profitSection}>
+            <div className={styles.profitLabel}>Profit</div>
+            <div className={`${styles.profitValue} ${getProfitClass(profit)}`}>
               {profit > 0 ? "+" : ""}
               {formatPrice(profit)}
               {roi !== null && (
-                <span className="roi-percentage">
+                <span className={styles.roiPercentage}>
                   ({roi > 0 ? "+" : ""}
                   {roi.toFixed(1)}%)
                 </span>
@@ -131,14 +133,14 @@ const ItemCard = ({ item }) => {
       </div>
 
       {traderSales.length > 0 && (
-        <div className="trader-details">
-          <div className="trader-label">Available at:</div>
-          <div className="trader-list">
+        <div className={styles.traderDetails}>
+          <div className={styles.traderLabel}>Available at:</div>
+          <div className={styles.traderList}>
             {traderSales.map((sale, index) => (
-              <span key={index} className="trader-tag">
+              <span key={index} className={styles.traderTag}>
                 {sale.source}: {formatPrice(sale.price)}
                 {sale.currency && sale.currency !== "₽" && (
-                  <span className="currency">
+                  <span className={styles.currency}>
                     {" "}
                     ({formatCurrency(sale.currency)})
                   </span>

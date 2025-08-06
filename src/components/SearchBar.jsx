@@ -1,17 +1,17 @@
 import React from "react";
-import "./SearchBar.css";
+import styles from "./SearchBar.module.css";
 
 const SearchBar = ({ searchTerm, onSearchChange }) => {
   return (
-    <div className="search-bar">
+    <div className={styles.searchBar}>
       <input
         type="text"
         placeholder="Search for items..."
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
-        className="search-input"
+        className={styles.searchInput}
       />
-      <div className="search-icon">🔍</div>
+      <div className={styles.searchIcon}>🔍</div>
     </div>
   );
 };
